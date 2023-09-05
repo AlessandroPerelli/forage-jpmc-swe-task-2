@@ -37,9 +37,18 @@ class App extends Component<{}, IState> {
    */
   getDataFromServer() {
     DataStreamer.getData((serverResponds: ServerRespond[]) => {
+      // If array is empty, return
+      if (!serverResponds.length) {
+        return;
+      }
+
       // Update the state by creating a new array of data that consists of
       // Previous data in the state and the new data from server
-      this.setState({ data: [...this.state.data, ...serverResponds] });
+      this.setState({ data: [...this.state.data, ...serverResponds] }, () => {
+        // Call getDataFromServer() again after 100ms
+        setTimeout(() => this.getDataFromServer(), 100);
+      });
+
     });
   }
 
