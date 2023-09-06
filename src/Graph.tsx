@@ -54,6 +54,13 @@ class Graph extends Component<IProps, {}> {
       elem.setAttribute('columns', '["top_ask_price"]');
       elem.setAttribute('column-pivots', '["stock"]');
       elem.setAttribute("view", "y_line");
+      elem.setAttribute("aggregates", JSON.stringify({
+        stock: "distinct count",
+        top_ask_price: "avg",
+        top_bid_price: "avg",
+        timestamp: "distinct count",
+      }));
+
       elem.load(this.table);
     }
   }
