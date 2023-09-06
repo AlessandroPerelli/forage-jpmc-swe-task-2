@@ -51,7 +51,6 @@ class App extends Component<{}, IState> {
         this.setState({ data: serverResponds, showGraph: true })
       });
       x++;
-      console.log(x)
       // After 1000 requests, stop the interval
       if (x > 1000) {
         clearInterval(interval);
